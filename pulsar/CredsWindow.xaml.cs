@@ -9,25 +9,29 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace pulsar
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for credentials.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class CredsWindow : Window
     {
-        public MainWindow()
+        public CredsWindow()
         {
             InitializeComponent();
         }
 
-        private void menuItemCredentials_Click(object sender, RoutedEventArgs e)
+        private void btnClear_Click(object sender, RoutedEventArgs e)
         {
-            var cw = new CredsWindow();
-            cw.Show();
+            txtApikey.Text = "";
+            txtUsername.Text = "";
+        }
+
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
