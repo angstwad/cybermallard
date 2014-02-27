@@ -31,7 +31,16 @@ namespace pulsar
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-
+            try
+            {
+                CredsActions.writeConfig(txtUsername.Text, txtApikey.Text);
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("There was a problem saving the configuration.", 
+                    "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

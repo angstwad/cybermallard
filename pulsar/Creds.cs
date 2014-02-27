@@ -2,21 +2,32 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Newtonsoft.Json;
+using System.IO;
 
 namespace pulsar
 {
-    class Creds
+    class CredsActions
     {
-        public static void writeConfig(string username, string apikey)
+        public static void writeConfig(string Username, string Apikey)
         {
-            // open file
-            // write config
-            // close file
+            Credentials c = new Credentials 
+            {
+                username = Username,
+                apikey = Apikey
+            };
+            File.WriteAllText(@"%APPDATA%\pulsar.json", JsonConvert.SerializeObject(c));
         }
 
-        public static Tuple<string, string> readConfig()
+        public static Credentials readConfig()
         {
-            return Tuple.Create("", "");
+            return new Credentials; // fix this later
         }
+    }
+
+    class Credentials
+    {
+        public string username { get; set; }
+        public string apikey { get; set; }
     }
 }
