@@ -1,0 +1,10 @@
+﻿<Window x:Class="pulsar.ProgressWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Progress" Height="190" Width="424" Name="ProgressWin">
+    <Grid Height="126" Width="400">
+        <ProgressBar Height="41" HorizontalAlignment="Left" Margin="28,41,0,0" Name="progressBar" VerticalAlignment="Top" Width="350" Value="0" />
+        <Label Content="File" Height="23" HorizontalAlignment="Left" Margin="28,12,0,0" Name="lblFileStatus" VerticalAlignment="Top" Width="350" />
+        <Label Height="28" HorizontalAlignment="Left" Margin="140,88,0,0" Name="lblNumberFile" VerticalAlignment="Top" Width="130" Content="File 0 of 0" HorizontalContentAlignment="Center" />
+    </Grid>
+</Window>

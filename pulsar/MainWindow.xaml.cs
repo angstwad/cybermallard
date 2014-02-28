@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using net.openstack.Core.Domain;
+using System.Windows.Threading;
 
 namespace pulsar
 {
@@ -77,8 +78,23 @@ namespace pulsar
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
                 string[] filePaths = (string[])e.Data.GetData(DataFormats.FileDrop);
+
+                ProgressWindow pw = new ProgressWindow();
+                pw.Show();
+
+                Action emptyDelegate = delegate { };
+                
+                double progress = 0;
+                int numFiles = filePaths.Length;
+                int count = 0;   
                 foreach (string path in filePaths)
                 {
+                    count++;
+                    pw.lblFileStatus.Content = path;
+                    progress = ((double)count / numFiles) * 100;
+                    pw.lblNumberFile.Content = String.Format("File {0} of {1}", count, numFiles);
+                    pw.progressBar.Value = progress;
+                    pw.Dispatcher.Invoke(emptyDelegate, DispatcherPriority.Render);
                     file.upload_file(cont.Name, path);
                 }
             }
