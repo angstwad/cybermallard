@@ -38,8 +38,9 @@ namespace pulsar
             }
             catch (Exception ex)
             {
-                MessageBox.Show("There was a problem saving the configuration.", 
+                MessageBox.Show("There was a problem saving the configuration." + ex.Message, 
                     "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
             }
         }
     }

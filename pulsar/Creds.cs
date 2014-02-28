@@ -16,12 +16,13 @@ namespace pulsar
                 username = Username,
                 apikey = Apikey
             };
-            File.WriteAllText(@"%APPDATA%\pulsar.json", JsonConvert.SerializeObject(c));
+            var path = Environment.ExpandEnvironmentVariables("%APPDATA%\\pulsar.json");
+            File.WriteAllText(path, JsonConvert.SerializeObject(c));
         }
 
         public static Credentials readConfig()
         {
-            return new Credentials; // fix this later
+            return new Credentials { }; // fix this later
         }
     }
 

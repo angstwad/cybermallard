@@ -24,10 +24,20 @@ namespace pulsar
             InitializeComponent();
         }
 
+        public static void ErrorMessage(string message, string title)
+        {
+            MessageBox.Show(message, title, MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+
         private void menuItemCredentials_Click(object sender, RoutedEventArgs e)
         {
             var cw = new CredsWindow();
             cw.Show();
+        }
+
+        private void image1_Drop(object sender, DragEventArgs e)
+        {
+
         }
     }
 }
