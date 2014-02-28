@@ -5,6 +5,7 @@ using System.Text;
 using net.openstack.Core.Domain;
 using net.openstack.Providers.Rackspace;
 using net.openstack.Core.Exceptions;
+using System.IO;
 
 namespace pulsar
 {
@@ -12,6 +13,7 @@ namespace pulsar
     {
         public static void authenticate()
         {
+            if File.Exists(Creds.path))
             try
             {
                 var creds = new CloudIdentity

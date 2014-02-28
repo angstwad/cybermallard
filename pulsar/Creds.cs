@@ -7,7 +7,7 @@ using System.IO;
 
 namespace pulsar
 {
-    class CredsActions
+    class Creds
     {
         public static string path = Environment.ExpandEnvironmentVariables("%APPDATA%\\pulsar.json");
         
