@@ -9,6 +9,8 @@ namespace pulsar
 {
     class CredsActions
     {
+        public static string path = Environment.ExpandEnvironmentVariables("%APPDATA%\\pulsar.json");
+        
         public static void writeConfig(string Username, string Apikey)
         {
             Credentials c = new Credentials 
@@ -16,13 +18,14 @@ namespace pulsar
                 username = Username,
                 apikey = Apikey
             };
-            var path = Environment.ExpandEnvironmentVariables("%APPDATA%\\pulsar.json");
             File.WriteAllText(path, JsonConvert.SerializeObject(c));
         }
 
         public static Credentials readConfig()
         {
-            return new Credentials { }; // fix this later
+            var file = File.ReadAllText(path);
+            Credentials creds = JsonConvert.DeserializeObject<Credentials>(file);
+            return creds;
         }
     }
 

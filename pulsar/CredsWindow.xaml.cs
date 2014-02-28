@@ -10,6 +10,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.IO;
 
 namespace pulsar
 {
@@ -21,6 +22,16 @@ namespace pulsar
         public CredsWindow()
         {
             InitializeComponent();
+
+            if (File.Exists(CredsActions.path)) 
+                this.loadWithCreds();
+        }
+
+        private void loadWithCreds()
+        {
+            var creds = CredsActions.readConfig();
+            txtUsername.Text = creds.username;
+            txtApikey.Text = creds.apikey;
         }
 
         private void btnClear_Click(object sender, RoutedEventArgs e)
@@ -34,14 +45,14 @@ namespace pulsar
             try
             {
                 CredsActions.writeConfig(txtUsername.Text, txtApikey.Text);
-                this.Close();
+                
             }
             catch (Exception ex)
             {
                 MessageBox.Show("There was a problem saving the configuration." + ex.Message, 
                     "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-
             }
+            this.Close();
         }
     }
 }
