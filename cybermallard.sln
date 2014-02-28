@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cybermallard", "pulsar\cybermallard.csproj", "{B6B1DF70-605A-4082-B0B0-CB325557F7F0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cybermallard", "cybermallard\cybermallard.csproj", "{B6B1DF70-605A-4082-B0B0-CB325557F7F0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
