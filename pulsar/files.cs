@@ -13,7 +13,7 @@ namespace pulsar
     {
         public static void authenticate()
         {
-            if File.Exists(Creds.path))
+            
             try
             {
                 var creds = new CloudIdentity

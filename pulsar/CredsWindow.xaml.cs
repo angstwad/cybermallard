@@ -23,15 +23,16 @@ namespace pulsar
         {
             InitializeComponent();
 
-            if (File.Exists(Creds.path)) 
+            if (File.Exists(CredsFile.path)) 
                 this.loadWithCreds();
         }
 
         private void loadWithCreds()
         {
-            var creds = Creds.readConfig();
+            var creds = CredsFile.readConfig();
             txtUsername.Text = creds.username;
             txtApikey.Text = creds.apikey;
+            MainWindow.credentials = creds;
         }
 
         private void btnClear_Click(object sender, RoutedEventArgs e)
@@ -44,7 +45,7 @@ namespace pulsar
         {
             try
             {
-                Creds.writeConfig(txtUsername.Text, txtApikey.Text);
+                CredsFile.writeConfig(txtUsername.Text, txtApikey.Text);
                 
             }
             catch (Exception ex)

@@ -19,6 +19,31 @@ namespace pulsar
     /// </summary>
     public partial class MainWindow : Window
     {
+        private static Credentials creds;
+
+        public static Credentials credentials
+        {
+            get
+            {
+                if (String.IsNullOrEmpty(creds.username) || String.IsNullOrEmpty(creds.apikey))
+                {
+                    try
+                    {
+                        creds = CredsFile.readConfig();
+                    }
+                    catch (Exception ex)
+                    {
+                        CredsWindow cw = new CredsWindow();
+                        cw.Show();
+                        MainWindow.ErrorMessage("Credentials are required." + ex.Message, "Credentials Required");
+                    }
+                }
+                return creds;
+            }
+            set { creds = value; }
+        }
+
+
         public MainWindow()
         {
             InitializeComponent();
