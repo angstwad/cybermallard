@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using net.openstack.Core.Domain;
 
 namespace pulsar
 {
@@ -19,34 +20,42 @@ namespace pulsar
     /// </summary>
     public partial class MainWindow : Window
     {
-        private static Credentials creds;
+        public MainWindow()
+        {
+            InitializeComponent();
+        }
 
+        private static Credentials creds;
         public static Credentials credentials
         {
             get
             {
-                if (String.IsNullOrEmpty(creds.username) || String.IsNullOrEmpty(creds.apikey))
+                if (creds == null)
                 {
-                    try
-                    {
-                        creds = CredsFile.readConfig();
-                    }
-                    catch (Exception ex)
-                    {
-                        CredsWindow cw = new CredsWindow();
-                        cw.Show();
-                        MainWindow.ErrorMessage("Credentials are required." + ex.Message, "Credentials Required");
-                    }
+                    load_creds();
                 }
                 return creds;
             }
             set { creds = value; }
         }
 
-
-        public MainWindow()
+        private static void load_creds()
         {
-            InitializeComponent();
+            try
+            {
+                creds = CredsFile.readConfig();
+            }
+            catch (Exception)
+            {
+                creds = new Credentials();
+            }
+
+            if (String.IsNullOrEmpty(creds.apikey) || String.IsNullOrEmpty(creds.username))
+            {
+                CredsWindow cw = new CredsWindow();
+                cw.Show();
+                MainWindow.ErrorMessage("Credentials are required.", "Credentials Required");
+            }
         }
 
         public static void ErrorMessage(string message, string title)
@@ -62,7 +71,17 @@ namespace pulsar
 
         private void image1_Drop(object sender, DragEventArgs e)
         {
+            CloudFiles file = new CloudFiles();
+            Container cont = file.get_container();
 
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                string[] filePaths = (string[])e.Data.GetData(DataFormats.FileDrop);
+                foreach (string path in filePaths)
+                {
+                    file.upload_file(cont.Name, path);
+                }
+            }
         }
     }
 }

@@ -19,6 +19,7 @@ namespace pulsar
                 apikey = Apikey
             };
             File.WriteAllText(path, JsonConvert.SerializeObject(c));
+            MainWindow.credentials = c;
         }
 
         public static Credentials readConfig()
