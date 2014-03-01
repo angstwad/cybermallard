@@ -1,5 +1,4 @@
-pulsar
-======
+# CyberMallard
 
 Rackspace Cloud Files Uploader written in C# for Windows.
 
